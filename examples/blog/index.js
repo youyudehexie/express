@@ -25,7 +25,7 @@ app.configure(function(){
   require('./routes/site')(app);
   require('./routes/post')(app);
   app.use(express.static(__dirname + '/public'));
-  app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+  app.use(express.errorHandler());
 });
 
 // Locals
