@@ -25,7 +25,7 @@ app.locals.use(function(req,res){
   res.locals.message = '';
   if (err) res.locals.message = '<p class="msg error">' + err + '</p>';
   if (msg) res.locals.message = '<p class="msg success">' + msg + '</p>';
-})
+});
 
 // Generate a salt for the user to prevent rainbow table attacks
 // for better security take a look at the bcrypt c++ addon:
