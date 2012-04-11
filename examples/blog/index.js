@@ -22,7 +22,8 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('keyboard cat'));
   app.use(express.session());
-  app.use(app.router);
+  require('./routes/site')(app);
+  require('./routes/post')(app);
   app.use(express.static(__dirname + '/public'));
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
@@ -38,11 +39,6 @@ app.locals.use(function(req, res){
   delete req.session.error;
   delete req.session.message;
 });
-
-// Routes
-
-require('./routes/site')(app);
-require('./routes/post')(app);
 
 if (!module.parent) {
   app.listen(3000);
