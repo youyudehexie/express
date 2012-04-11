@@ -1,0 +1,17 @@
+#!/usr/bin/env node
+
+var buf = '';
+process.stdin.setEncoding('ascii');
+process.stdin.on('data', function(chunk){
+  buf += chunk;
+}).on('end', function(){
+  var obj = JSON.parse(buf);
+  obj.forEach(function(comment){
+    if (comment.ignore) return;
+    if (!comment.ctx) return;
+    console.log();
+    console.log('## %s', comment.ctx.string);
+    console.log();
+    console.log(comment.description.full);
+  });
+}).resume();
