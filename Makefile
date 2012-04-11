@@ -1,6 +1,7 @@
 
 DOCS = docs/*.md
 HTMLDOCS = $(DOCS:.md=.html)
+MANTASTIC = http://mantastic.herokuapp.com
 REPORTER = dot
 
 test:
@@ -11,6 +12,9 @@ test-acceptance:
 	@NODE_ENV=test ./node_modules/.bin/mocha \
 		--reporter spec \
 		test/acceptance/*.js
+
+jade.1: jade.md
+	curl -sF page=@$< $(MANTASTIC) > $@
 
 docs: $(HTMLDOCS)
 	@ echo "... generating TOC"

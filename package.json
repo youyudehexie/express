@@ -25,6 +25,7 @@
     "connect-redis": "*",
     "github-flavored-markdown": "*"
   },
+  "man": "./jade.1",
   "keywords": ["express", "framework", "sinatra", "web", "rest", "restful", "router"],
   "repository": "git://github.com/visionmedia/express",
   "main": "index",
