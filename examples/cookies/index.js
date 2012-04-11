@@ -6,7 +6,6 @@
 var express = require('../../')
   , app = module.exports = express();
 
-
 // add favicon() before logger() so
 // GET /favicon.ico requests are not
 // logged, because this middleware
