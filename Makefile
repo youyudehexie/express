@@ -18,7 +18,8 @@ express.1: express.md
 
 express.md:
 	rm -f $@
-	dox --raw < lib/application.js | support/md > $@
+	cat support/head.md > $@
+	dox --raw < lib/application.js | support/md >> $@
 	dox --raw < lib/request.js | support/md >> $@
 	dox --raw < lib/response.js | support/md >> $@
 
