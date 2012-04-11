@@ -11,7 +11,7 @@ var app = module.exports = express();
 app.use(express.cookieParser('manny is cool'));
 
 // add req.session cookie support
-app.use(express.cookieSessions());
+app.use(express.cookieSession());
 
 // do something with the session
 app.use(count);
