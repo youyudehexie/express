@@ -13,8 +13,14 @@ test-acceptance:
 		--reporter spec \
 		test/acceptance/*.js
 
-jade.1: jade.md
+express.1: express.md
 	curl -sF page=@$< $(MANTASTIC) > $@
+
+express.md:
+	rm -f $@
+	dox --raw < lib/application.js | support/md > $@
+	dox --raw < lib/request.js | support/md >> $@
+	dox --raw < lib/response.js | support/md >> $@
 
 docs: $(HTMLDOCS)
 	@ echo "... generating TOC"
@@ -44,5 +50,6 @@ benchmark:
 
 docclean:
 	rm -f docs/*.{1,html}
+	rm -f express.{1,md}
 
 .PHONY: site test benchmark docs docclean test-acceptance
