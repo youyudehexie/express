@@ -8,6 +8,7 @@ var express = require('../');
 var app = express()
   , blog = express();
 
+// app.use(express.logger('dev'))
 app.use('/blog', blog);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');

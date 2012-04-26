@@ -10,6 +10,13 @@ bench() {
     | xargs echo "$2:"
 }
 
+bench_conditional() {
+  ab -n 5000 -c 50 -H "If-None-Match: -1421637536" -k -q http://127.0.0.1:8000$1 \
+    | grep "Requests per" \
+    | cut -d ' ' -f 7 \
+    | xargs echo "$2:"
+}
+
 sleep .5
 bench / "Hello World"
 bench /blog "Mounted Hello World"
@@ -19,7 +26,6 @@ bench /render "Render"
 bench /json "JSON tiny"
 bench /json/small "JSON small"
 bench /json/large "JSON large"
-
-# -1099547789
+bench_conditional /json/large "JSON large etag"
 
 kill -9 $pid
