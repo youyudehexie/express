@@ -13,8 +13,21 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.locals.self = true;
 
+var repo = require('../package.json');
+
 app.get('/render', function(req, res){
   res.render('hello');
+});
+
+app.get('/json/small', function(req, res){
+  res.send(repo);
+});
+
+app.get('/json/large', function(req, res){
+  var repos = [];
+  var n = 50;
+  while (n--) repos.push(repo);
+  res.send(repos);
 });
 
 blog.get('/', function(req, res){

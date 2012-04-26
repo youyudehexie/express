@@ -13,9 +13,13 @@ bench() {
 sleep .5
 bench / "Hello World"
 bench /blog "Mounted Hello World"
-bench /json "JSON"
 bench /middleware "Middleware"
 bench /match "Router"
 bench /render "Render"
+bench /json "JSON tiny"
+bench /json/small "JSON small"
+bench /json/large "JSON large"
+
+# -1099547789
 
 kill -9 $pid
