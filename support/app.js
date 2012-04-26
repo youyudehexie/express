@@ -26,7 +26,7 @@ app.get('/json/small', function(req, res){
 
 app.get('/json/large', function(req, res){
   var repos = [];
-  var n = 20;
+  var n = 10;
   while (n--) repos.push(repo);
   res.send(repos);
 });
