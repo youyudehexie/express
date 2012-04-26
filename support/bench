@@ -28,4 +28,6 @@ bench /json/small "JSON small"
 bench /json/large "JSON large"
 bench_conditional /json/large "JSON large etag" -1355435680
 
+# 1.25 mb/s
+
 kill -9 $pid
