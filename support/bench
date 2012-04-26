@@ -10,6 +10,13 @@ bench() {
     | xargs echo "$2:"
 }
 
+bench_if_none_match() {
+  ab -n 5000 -c 50 -H "If-None-Match: $1" -k -q http://127.0.0.1:8000$2 \
+    | grep "Requests per" \
+    | cut -d ' ' -f 7 \
+    | xargs echo "$3:"
+}
+
 sleep .5
 bench / "Hello World"
 bench /blog "Mounted Hello World"
@@ -17,5 +24,8 @@ bench /json "JSON"
 bench /middleware "Middleware"
 bench /match "Router"
 bench /render "Render"
+bench_if_none_match 881883367 /render "Render with etag"
+bench /render/large "Render large"
+bench_if_none_match 1998517113 /render/large "Render large with etag"
 
 kill -9 $pid

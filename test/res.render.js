@@ -74,7 +74,50 @@ describe('res', function(){
         done();
       });
     })
+
+    it('should set ETag', function(done){
+      var app = express();
   
+      app.use(function(req, res){
+        res.render('test/fixtures/blog/post.jade');
+      });
+      
+      request(app)
+      .get('/')
+      .end(function(res){
+        res.headers.should.have.property('etag');
+        done();
+      });
+    })
+
+    it('should respond with 304 when locals match', function(done){
+      var app = express();
+
+      app.set('views', __dirname + '/fixtures');
+      app.set('view engine', 'jade');
+
+      app.use(function(req, res){
+        var name = '/' == req.url ? 'Tobi' : 'Loki';
+        res.render('blog/post', { name: name });
+      });
+      
+      request(app)
+      .get('/')
+      .end(function(res){
+        res.body.should.equal('<h1>blog post</h1>');
+        request(app)
+        .get('/')
+        .set('If-None-Match', res.headers.etag)
+        .expect(304, function(err){
+          if (err) return done(err);
+          request(app)
+          .get('/manipulate')
+          .set('If-None-Match', res.headers.etag)
+          .expect(200, done);
+        });
+      })
+    })
+
     describe('when an error occurs', function(){
       it('should next(err)', function(done){
         var app = express();
@@ -297,7 +340,6 @@ describe('res', function(){
           done();
         });
       })
-      
     })
   })
 })
