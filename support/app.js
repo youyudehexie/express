@@ -25,7 +25,7 @@ while (n--) {
 }
 
 app.get('/render', function(req, res){
-  res.render('hello');
+  res.render('small');
 });
 
 app.get('/render/large', function(req, res){

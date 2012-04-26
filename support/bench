@@ -24,8 +24,8 @@ bench /json "JSON"
 bench /middleware "Middleware"
 bench /match "Router"
 bench /render "Render"
-bench_if_none_match 881883367 /render "Render with etag"
+bench_if_none_match "-2004506675" /render "Render with etag"
 bench /render/large "Render large"
-bench_if_none_match 1998517113 /render/large "Render large with etag"
+bench_if_none_match "1998517113" /render/large "Render large with etag"
 
 kill -9 $pid
